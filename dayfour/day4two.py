@@ -9,6 +9,7 @@ def run_tests(file):
             game, reward = check_card(walrus)
             rewards[game] = reward
             cards[game] = 1
+        f.close()
         
     final_rewards = check_dem_thingers(cards, rewards)
     final_count = final_tally(final_rewards)
