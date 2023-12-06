@@ -1,16 +1,11 @@
-
 race1 = 71530
 dist1 = 940200
 race2 = 55826490
 dist2 = 246144110121111
 
-
-
-
 def find_possible(time, record):
-    ratio = int(record/time)
-    first = ratio
-    last = time - ratio * 2
+    first = int(record/time)
+    last = time - first * 2
     min_time = 0
     max_time = 0
     for mi in range(0, first * 2):
@@ -27,4 +22,4 @@ def find_possible(time, record):
     return max_time - min_time
 
 
-print(find_possible(race2, dist2))
+print(find_possible(race1, dist1))
