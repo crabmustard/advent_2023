@@ -21,10 +21,10 @@ def find_possible(time, record):
     for ma in range(last, time):
         trav = ma * (time - ma)
         if trav < record:
-            max_time = ma-1
+            max_time = ma
             break
 
-    return max_time, min_time
+    return max_time - min_time
 
 
 print(find_possible(race2, dist2))
