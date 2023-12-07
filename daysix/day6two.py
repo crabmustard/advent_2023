@@ -28,7 +28,7 @@ dist2 = 246144110121111
 
 
 
-def find_possible_rev(time, record):
+def run_race(time, record):
     first = int(record/time)
     last = time - first * 2
     min_time = 0
@@ -55,7 +55,7 @@ def find_possible_rev(time, record):
                 break
     return (max_time - min_time)
 
-t1 = time.perf_counter()
-find_possible_rev(race2, dist2))
-t2 = time.perf_counter()
+t1 = time.perf_counter_ns()
+run_race(race2, dist2)
+t2 = time.perf_counter_ns()
 print(t2-t1)
