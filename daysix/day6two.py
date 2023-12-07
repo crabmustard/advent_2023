@@ -1,3 +1,4 @@
+import time
 race1 = 71530
 dist1 = 940200
 race2 = 55826490
@@ -54,5 +55,7 @@ def find_possible_rev(time, record):
                 break
     return (max_time - min_time)
 
-
-print(find_possible_rev(race2, dist2))
+t1 = time.perf_counter()
+find_possible_rev(race2, dist2))
+t2 = time.perf_counter()
+print(t2-t1)
