@@ -1,8 +1,7 @@
 from pprint import pprint
 import string
-symbol_string = '''!"#$%&'()*+,-/:.;=<>?@[\\]^_`{|}~'''
-symbol_no_dot = symbol_string.replace('.','')
-numberstring = string.digits
+sym_str = '''!"#$%&'()*+,-/:.;=<>?@[\\]^_`{|}~'''
+numstr = string.digits
 
 
 def open_the_damn_file(file):
@@ -30,7 +29,7 @@ def scan_list(in_list):
     return symbol_idx
 
 def check_around_symbols(doc, pair):
-    numbers_located = []
+    f_nums = []
     # print(pair)
     i = pair[0]
     j = pair[1]
@@ -44,45 +43,41 @@ def check_around_symbols(doc, pair):
     bot_c = doc[i+1][j]
     bot_r = doc[i+1][j+1]
     
-    if top_c in numberstring:
-        if top_r in numberstring and top_l not in numberstring:
-            numbers_located.append(doc[i-1][j:j+3].strip(symbol_string).rstrip('.'))
-        elif top_l in numberstring and top_r not in numberstring:
-            numbers_located.append(doc[i-1][j-2:j+1].strip(symbol_string).lstrip('.'))
+    if top_c in numstr:
+        if top_r in numstr and top_l not in numstr:
+            f_nums.append(doc[i-1][j:j+3].strip(sym_str).rstrip('.'))
+        elif top_l in numstr and top_r not in numstr:
+            f_nums.append(doc[i-1][j-2:j+1].strip(sym_str).lstrip('.'))
         else:
-            numbers_located.append(doc[i-1][j-2:j+2].strip(symbol_string)) 
+            f_nums.append(doc[i-1][j-2:j+2].strip(sym_str)) 
     
-    if top_l in numberstring and top_c not in numberstring:
-        numbers_located.append(doc[i-1][j-3:j].strip(symbol_string).lstrip('.'))
-    if top_r in numberstring and top_c not in numberstring:
-        numbers_located.append(doc[i-1][j+1:j+4].strip(symbol_string).rstrip('.')) 
+    if top_l in numstr and top_c not in numstr:
+        f_nums.append(doc[i-1][j-3:j].strip(sym_str).lstrip('.'))
+    if top_r in numstr and top_c not in numstr:
+        f_nums.append(doc[i-1][j+1:j+4].strip(sym_str).rstrip('.')) 
     
-    if mid_r in numberstring:
-        numbers_located.append(doc[i][j+1:j+4].strip(symbol_string).rstrip('.'))
-    if mid_l in numberstring:
-        numbers_located.append(doc[i][j-3:j].strip(symbol_string).lstrip('.'))
+    if mid_r in numstr:
+        f_nums.append(doc[i][j+1:j+4].strip(sym_str).rstrip('.'))
+    if mid_l in numstr:
+        f_nums.append(doc[i][j-3:j].strip(sym_str).lstrip('.'))
     
-    if bot_c in numberstring:
-        if bot_r in numberstring and bot_l not in numberstring:
-            numbers_located.append(doc[i+1][j:j+3].strip(symbol_string))
-        elif bot_l in numberstring and bot_r not in numberstring:
-            numbers_located.append(doc[i+1][j-2:j+1].strip(symbol_string).lstrip('.'))
+    if bot_c in numstr:
+        if bot_r in numstr and bot_l not in numstr:
+            f_nums.append(doc[i+1][j:j+3].strip(sym_str).rstrip('.'))
+        elif bot_l in numstr and bot_r not in numstr:
+            f_nums.append(doc[i+1][j-2:j+1].strip(sym_str).lstrip('.'))
         else:
-            numbers_located.append(doc[i+1][j-2:j+2].strip(symbol_string))
+            f_nums.append(doc[i+1][j-2:j+2].strip(sym_str))
     
-    if bot_l in numberstring and bot_c not in numberstring:
-        numbers_located.append(doc[i+1][j-3:j].strip(symbol_string).rstrip('.'))
-    if bot_r in numberstring and bot_c not in numberstring:
-        numbers_located.append(doc[i+1][j+1:j+4].strip(symbol_string).rstrip('.'))
+    if bot_l in numstr and bot_c not in numstr:
+        f_nums.append(doc[i+1][j-3:j].strip(sym_str).rstrip('.'))
+    if bot_r in numstr and bot_c not in numstr:
+        f_nums.append(doc[i+1][j+1:j+4].strip(sym_str).rstrip('.'))
 
-    if len(numbers_located) ==2:
-        return True, numbers_located
+    if len(f_nums) ==2:
+        return True, f_nums
     else:
-        return False, numbers_located
-
-def final_check(numbers_located):
-    if truth:
-        result = numbers_located[1] * numbers_located[0]   
+        return False, f_nums
 
 def it_a_process(file):
     ratio_total = 0
@@ -92,8 +87,8 @@ def it_a_process(file):
 
         possibility, numbers = check_around_symbols(schem, poss)
         if possibility:
-            ratio = int(numbers[0]) * int(numbers[1])
-            ratio_total += ratio
+            ratio_total += int(numbers[0]) * int(numbers[1])
+
     return ratio_total
 
 

@@ -1,8 +1,9 @@
 from pprint import pprint
 import string
-symbol_string = '''!"#$%&'()*+,-/:.;=<>?@[\\]^_`{|}~'''
-symbol_no_dot = symbol_string.replace('.','')
-numberstring = string.digits
+sym_str = '''!"#$%&'()*+,-/:.;=<>?@[\\]^_`{|}~'''
+no_dot = sym_str.replace('.','')
+numstr = string.digits
+
 
 
 
@@ -13,7 +14,6 @@ def start_the_magic(file):
     for index_pair in bar:
         bambam = check_around_symbols(foo, index_pair)
         for item in bambam:
-            print(item)
             finaltotal += int(item)
 
     return finaltotal
@@ -37,20 +37,19 @@ def scan_list(in_list):
     symbol_idx = []
     for i in range(len(in_list)):
         for j in range(len(in_list[i])):
-            if in_list[i][j] in symbol_no_dot:
+            if in_list[i][j] in no_dot:
                 symbol_idx.append([i, j])
     return symbol_idx
 
 def scan_line(in_line, counter):
     line_idx = []
     for j in range(len(in_line)):
-        if in_line[j] in symbol_no_dot:
+        if in_line[j] in no_dot:
             line_idx.append([counter, j])
     return line_idx
     
 def check_around_symbols(doc, pair):
     numbers_located = []
-    # print(pair)
     i = pair[0]
     j = pair[1]
     top_l = doc[i-1][j-1]
@@ -62,36 +61,34 @@ def check_around_symbols(doc, pair):
     bot_l = doc[i+1][j-1]
     bot_c = doc[i+1][j]
     bot_r = doc[i+1][j+1]
-    # print(f'{top_l} {top_c} {top_r}')
-    # print(f'{mid_l} {mid_c} {mid_r}')
-    # print(f'{bot_l} {bot_c} {bot_r}')
+
     
-    if top_c in numberstring:
-        if top_r in numberstring and top_l not in numberstring:
-            numbers_located.append(doc[i-1][j:j+3].strip(symbol_string).rstrip('.'))
-        elif top_l in numberstring and top_r not in numberstring:
-            numbers_located.append(doc[i-1][j-2:j+1].strip(symbol_string).lstrip('.'))
+    if top_c in numstr:
+        if top_r in numstr and top_l not in numstr:
+            numbers_located.append(doc[i-1][j:j+3].strip(sym_str).rstrip('.'))
+        elif top_l in numstr and top_r not in numstr:
+            numbers_located.append(doc[i-1][j-2:j+1].strip(sym_str).lstrip('.'))
         else:
-            numbers_located.append(doc[i-1][j-2:j+2].strip(symbol_string)) 
-    if top_l in numberstring and top_c not in numberstring:
-        numbers_located.append(doc[i-1][j-3:j].strip(symbol_string).lstrip('.'))
-    if top_r in numberstring and top_c not in numberstring:
-        numbers_located.append(doc[i-1][j+1:j+4].strip(symbol_string).rstrip('.')) 
-    if mid_r in numberstring:
-        numbers_located.append(doc[i][j+1:j+4].strip(symbol_string).rstrip('.'))
-    if mid_l in numberstring:
-        numbers_located.append(doc[i][j-3:j].strip(symbol_string).lstrip('.'))
-    if bot_c in numberstring:
-        if bot_r in numberstring and bot_l not in numberstring:
-            numbers_located.append(doc[i+1][j:j+3].strip(symbol_string))
-        elif bot_l in numberstring and bot_r not in numberstring:
-            numbers_located.append(doc[i+1][j-2:j+1].strip(symbol_string).lstrip('.'))
+            numbers_located.append(doc[i-1][j-2:j+2].strip(sym_str)) 
+    if top_l in numstr and top_c not in numstr:
+        numbers_located.append(doc[i-1][j-3:j].strip(sym_str).lstrip('.'))
+    if top_r in numstr and top_c not in numstr:
+        numbers_located.append(doc[i-1][j+1:j+4].strip(sym_str).rstrip('.')) 
+    if mid_r in numstr:
+        numbers_located.append(doc[i][j+1:j+4].strip(sym_str).rstrip('.'))
+    if mid_l in numstr:
+        numbers_located.append(doc[i][j-3:j].strip(sym_str).lstrip('.'))
+    if bot_c in numstr:
+        if bot_r in numstr and bot_l not in numstr:
+            numbers_located.append(doc[i+1][j:j+3].strip(sym_str))
+        elif bot_l in numstr and bot_r not in numstr:
+            numbers_located.append(doc[i+1][j-2:j+1].strip(sym_str).lstrip('.'))
         else:
-            numbers_located.append(doc[i+1][j-2:j+2].strip(symbol_string))
-    if bot_l in numberstring and bot_c not in numberstring:
-        numbers_located.append(doc[i+1][j-3:j].strip(symbol_string).rstrip('.'))
-    if bot_r in numberstring and bot_c not in numberstring:
-        numbers_located.append(doc[i+1][j+1:j+4].strip(symbol_string).rstrip('.'))
+            numbers_located.append(doc[i+1][j-2:j+2].strip(sym_str))
+    if bot_l in numstr and bot_c not in numstr:
+        numbers_located.append(doc[i+1][j-3:j].strip(sym_str).rstrip('.'))
+    if bot_r in numstr and bot_c not in numstr:
+        numbers_located.append(doc[i+1][j+1:j+4].strip(sym_str).rstrip('.'))
             
     return numbers_located
     
