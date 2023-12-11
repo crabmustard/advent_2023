@@ -25,25 +25,19 @@ def find_diff_right(in_list, total):
         return in_list, run_total
 
 def test_one(file):
-    final_list = []
     data = open(file, 'r').readlines()
+    final_tally = 0
     for i in range(len(data)):
         current = [int(l) for l in data[i].strip().split()]
-        final_list.append(find_diff_right(current, 0)[1])
-    final_tally = 0
-    for i in final_list:
-        final_tally += i
+        final_tally += find_diff_right(current, 0)[1]
     return final_tally
 
 def test_two(file):
-    final_list = []
     data = open(file, 'r').readlines()
+    final_tally = 0
     for i in range(len(data)):
         current = [int(l) for l in data[i].strip().split()]
-        final_list.append(find_diff_left(current, 0)[1])
-    final_tally = 0
-    for i in final_list:
-        final_tally += i
+        final_tally += find_diff_left(current, 0)[1]
     return final_tally
 
 

@@ -34,4 +34,5 @@ def run_game(file):
 
 
 
+
 print(run_game('day8.txt'))
