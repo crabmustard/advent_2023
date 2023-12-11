@@ -51,9 +51,10 @@ def sum_total(distances, mult):
         total += d1 + d2*mult
     return total
 
-    grid = get_file('day11.txt')
+
+grid = get_file('day11.txt')
 grid, galaxy, diffs = make_grid(grid)
 after = check_distances(galaxy, diffs)
 # 2nd parameter: 1 for test1, 999999 for test2
-after2 = sum_total(after, 999999)
-after2
+after2 = sum_total(after, 1)
+print(after2)
